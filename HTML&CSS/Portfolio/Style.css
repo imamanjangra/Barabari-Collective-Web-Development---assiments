@@ -1,0 +1,200 @@
+
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f4f4f4;
+}
+
+
+
+header{
+    background:#1e293b;
+    padding:20px;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav h2{
+    color:white;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:orange;
+}
+
+
+.hero{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:60px;
+    padding:60px;
+    background:white;
+}
+
+.hero img{
+    width:220px;
+    border-radius:50%;
+}
+
+.hero-content h1{
+    font-size:3rem;
+}
+
+.hero-content h3{
+    color:#2563eb;
+    margin:10px 0;
+}
+
+
+
+.title{
+    text-align:center;
+    margin:40px 0;
+}
+
+
+
+.skills-container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:20px;
+}
+
+.skill-card{
+    background:white;
+    padding:20px 40px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.skill-card:hover{
+    transform:translateY(-8px);
+}
+
+
+
+.project-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    padding:30px;
+}
+
+.project-card{
+    background:white;
+    padding:50px;
+    text-align:center;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.project-card:hover{
+    transform:scale(1.05);
+}
+
+
+
+table{
+    width:80%;
+    margin:30px auto;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,td{
+    border:1px solid gray;
+    padding:15px;
+    text-align:center;
+}
+
+th{
+    background:#1e293b;
+    color:white;
+}
+
+
+
+form{
+    width:60%;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+input,
+textarea{
+    padding:15px;
+    border:1px solid gray;
+    border-radius:8px;
+}
+
+button{
+    padding:15px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+
+footer{
+    margin-top:50px;
+    background:#1e293b;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .project-container{
+        grid-template-columns:1fr;
+    }
+
+}
