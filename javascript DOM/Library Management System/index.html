@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <h1> Library Management System</h1>
+
+
+    <button id="toggle-form">
+        Add New Book
+    </button>
+
+
+
+    <section class="add-book-section">
+
+
+        <h2>Add Book</h2>
+
+
+        <form id="book-form">
+
+
+            <input 
+            type="text"
+            id="title"
+            placeholder="Book Title"
+            required>
+
+
+
+            <input 
+            type="text"
+            id="author"
+            placeholder="Author"
+            required>
+
+
+
+
+            <select id="type">
+
+                <option value="physical">
+                    Physical Book
+                </option>
+
+                <option value="ebook">
+                    E-Book
+                </option>
+
+            </select>
+
+
+
+
+            <div id="ebook-details">
+
+
+                <input 
+                type="number"
+                id="fileSize"
+                placeholder="File Size (MB)">
+
+
+
+            </div>
+
+
+
+            <button type="submit">
+                Add Book
+            </button>
+
+
+        </form>
+
+
+    </section>
+
+
+
+
+
+    <section id="book-list">
+
+
+    </section>
+
+
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

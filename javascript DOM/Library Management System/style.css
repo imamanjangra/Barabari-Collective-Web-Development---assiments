@@ -1,0 +1,183 @@
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+body{
+
+    font-family:Arial,sans-serif;
+
+    background:#f4f4f4;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:30px;
+
+}
+
+
+
+.container{
+
+    width:800px;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+
+}
+
+
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+button{
+
+    background:#3498db;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 15px;
+
+    cursor:pointer;
+
+    border-radius:5px;
+
+}
+
+
+
+.add-book-section{
+
+    margin-top:20px;
+
+    padding:20px;
+
+    background:#eee;
+
+}
+
+
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+
+input,select{
+
+    padding:10px;
+
+}
+
+
+
+
+#ebook-details{
+
+    display:none;
+
+}
+
+
+
+
+#book-list{
+
+    margin-top:25px;
+
+}
+
+
+
+
+.book-card{
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    border-radius:8px;
+
+    background:#fafafa;
+
+    border-left:6px solid green;
+
+}
+
+
+
+.book-card.unavailable{
+
+    border-color:red;
+
+}
+
+
+
+.book-card.ebook{
+
+    border-color:#3498db;
+
+}
+
+
+
+.book-card button{
+
+    margin-right:10px;
+
+    margin-top:10px;
+
+}
+
+
+
+.remove{
+
+    background:#e74c3c;
+
+}
+
+
+.return{
+
+    background:#2ecc71;
+
+}
+
+
+.download{
+
+    background:#8e44ad;
+
+}
