@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Dashboard</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .user-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        #status {
+            color: blue;
+            font-weight: bold;
+            min-height: 20px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin: 5px 5px 5px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>User Management Dashboard</h1>
+
+    <div id="status"></div>
+
+    <button id="btn-create">
+        Add New User (POST)
+    </button>
+
+    <div id="user-list"></div>
+
+    <script>
+
+        const API_URL = 'https://jsonplaceholder.typicode.com/users';
+
+        const userListDiv = document.getElementById('user-list');
+        const statusDiv = document.getElementById('status');
+
+        function setStatus(message) {
+            statusDiv.textContent = message;
+        }
+
+  
+        async function loadUsers() {
+
+            setStatus("Loading...");
+
+            try {
+                const response = await fetch(API_URL);
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch users");
+                }
+
+                const users = await response.json();
+
+                userListDiv.innerHTML = "";
+
+                users.forEach((user, index) => {
+
+                    const userCard = document.createElement('div');
+                    userCard.className = 'user-card';
+
+                    userCard.innerHTML = `
+                        <h3>${user.name}</h3>
+                        <p>Email: <span id="email-${user.id}">${user.email}</span></p>
+                    `;
+
+
+                    if (index === 0) {
+                        const updateBtn = document.createElement('button');
+
+                        updateBtn.textContent = "Update Email";
+
+                        updateBtn.addEventListener('click', () => {
+                            updateUserEmail(user.id);
+                        });
+
+                        userCard.appendChild(updateBtn);
+                    }
+
+
+                    const deleteBtn = document.createElement('button');
+
+                    deleteBtn.textContent = "Delete";
+
+                    deleteBtn.addEventListener('click', () => {
+                        deleteUser(user.id);
+                    });
+
+                    userCard.appendChild(deleteBtn);
+
+                    userListDiv.appendChild(userCard);
+
+                });
+
+            } catch (error) {
+                console.error(error);
+                setStatus("Error: " + error.message);
+
+            } finally {
+                if (!statusDiv.textContent.startsWith("Error:")) {
+                    setStatus("");
+                }
+            }
+        }
+
+        document.getElementById('btn-create')
+            .addEventListener('click', async () => {
+
+                setStatus("Loading...");
+
+                const newUser = {
+                    name: "John Doe",
+                    email: "john@example.com"
+                };
+
+                try {
+
+                    const response = await fetch(API_URL, {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify(newUser)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Failed to create user");
+                    }
+
+                    const createdUser = await response.json();
+
+                    const userCard = document.createElement('div');
+                    userCard.className = 'user-card';
+
+                    userCard.innerHTML = `
+                        <h3>${createdUser.name}</h3>
+                        <p>Email: <span id="email-${createdUser.id}">${createdUser.email}</span></p>
+                    `;
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = "Delete";
+
+                    deleteBtn.addEventListener('click', () => {
+                        deleteUser(createdUser.id);
+                    });
+
+                    userCard.appendChild(deleteBtn);
+
+                    userListDiv.appendChild(userCard);
+
+                    setStatus("User created successfully!");
+
+                } catch (error) {
+                    console.error(error);
+                    setStatus("Error: " + error.message);
+
+                } 
+
+            });
+
+
+        async function updateUserEmail(userId) {
+
+            setStatus("Loading...");
+
+            try {
+
+   
+                const emailElement = document.getElementById(`email-${userId}`);
+
+                const userName = emailElement
+                    .closest('.user-card')
+                    .querySelector('h3').textContent;
+
+                const updatedUser = {
+                    id: userId,
+                    name: userName,
+                    email: "updated@example.com"
+                };
+
+                const response = await fetch(`${API_URL}/${userId}`, {
+
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify(updatedUser)
+
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to update user");
+                }
+
+                const result = await response.json();
+
+                emailElement.textContent = result.email;
+
+                setStatus("Email updated successfully!");
+
+            } catch (error) {
+                console.error(error);
+                setStatus("Error: " + error.message);
+
+            } 
+        }
+
+
+        async function deleteUser(userId) {
+
+            setStatus("Loading...");
+
+            try {
+
+                const response = await fetch(`${API_URL}/${userId}`, {
+
+                    method: "DELETE"
+
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to delete user");
+                }
+
+
+                const emailElement = document.getElementById(`email-${userId}`);
+
+                if (emailElement) {
+                    const userCard = emailElement.closest('.user-card');
+                    userCard.remove();
+                }
+
+                setStatus("User deleted successfully!");
+
+            } catch (error) {
+                console.error(error);
+                setStatus("Error: " + error.message);
+
+            } 
+        }
+
+        loadUsers();
+
+    </script>
+
+</body>
+
+</html>
